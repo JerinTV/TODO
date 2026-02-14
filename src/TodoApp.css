@@ -1,0 +1,1654 @@
+/* Import Google Fonts for a premium look */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap'); /* For 'Welcome to ZenTodo' */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
+
+/* Base font size for global scaling */
+html {
+    font-size: 14px; /* Reduced from browser default (usually 16px) for a smaller overall scale */
+}
+
+/* Base layout */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif; /* Premium general font */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.todo-main {
+    display: flex;
+    min-height: 100vh;
+    background: linear-gradient(to right, #dbeafe, #e0f2fe);
+    box-sizing: border-box;
+    position: relative;
+    z-index: 0;
+}
+
+.sidebar {
+    width: 15.714rem; /* Converted from 220px (220/14) */
+    background-color: #ffffff;
+    padding: 2rem 1rem;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 5;
+    display: flex; /* Make sidebar a flex container */
+    flex-direction: column; /* Stack items vertically */
+    justify-content: space-between; /* Push add button to bottom */
+}
+
+.sidebar h2.logo-animated {
+    font-family: 'Montserrat', sans-serif; /* Premium font for logo */
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem; /* Adjusted margin */
+    color: #007bff;
+    animation: bounceIn 1s ease-out;
+    text-align: center; /* Center logo */
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Profile Section Styling */
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e0e7ff; /* A subtle separator */
+}
+
+.profile-icon {
+    font-size: 3.5rem; /* Larger icon */
+    color: #007bff; /* Primary color */
+    margin-bottom: 0.5rem;
+}
+
+.profile-icon.guest {
+    color: #9ca3af; /* Grey for guest */
+}
+
+.profile-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.profile-logout-btn, .profile-login-btn {
+    background-color: #ef4444; /* Red for logout */
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.428rem; /* Converted from 6px */
+    border: none;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background-color 0.2s;
+}
+
+.profile-login-btn {
+    background-color: #28a745; /* Green for login */
+}
+
+.profile-logout-btn:hover { background-color: #dc2626; }
+.profile-login-btn:hover { background-color: #218838; }
+
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1; /* Allow ul to take available space */
+}
+
+.sidebar li {
+    margin-bottom: 1rem;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.2s ease, background-color 0.2s;
+    display: flex;
+    align-items: center; /* Align icon and text */
+    padding: 0.5rem 0.8rem; /* Add padding for better click area */
+    border-radius: 0.571rem; /* Converted from 8px */
+}
+
+.sidebar li svg { /* Style for icons */
+    margin-right: 0.75rem;
+    font-size: 1.1rem;
+    color: #666;
+}
+
+.sidebar li:hover {
+    color: #007bff;
+    background-color: #e0f2fe; /* Light blue hover background */
+}
+.sidebar li:hover svg {
+    color: #007bff;
+}
+
+.sidebar li.active { /* Active state for main sidebar links */
+    background-color: #007bff;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 0.142rem 0.571rem rgba(0, 123, 255, 0.2); /* Converted from 2px 8px */
+}
+.sidebar li.active svg {
+    color: white; /* White icon for active state */
+}
+
+.sidebar .count {
+    margin-left: auto; /* Push count to the right */
+    background-color: rgba(0,0,0,0.08); /* Light background for count */
+    padding: 0.2rem 0.6rem;
+    border-radius: 0.857rem; /* Converted from 12px */
+    font-size: 0.8em;
+    font-weight: 600;
+    color: #555;
+}
+
+.sidebar li.active .count {
+    background-color: rgba(255,255,255,0.2); /* White background for active count */
+    color: white;
+}
+
+
+.sidebar input[type="text"] {
+    flex-grow: 1; /* Allow input to take more space */
+    padding: 0.5rem; /* Larger padding */
+    border-radius: 0.571rem; /* Converted from 8px */
+    border: 0.071rem solid #ddd; /* Converted from 1px */
+    font-size: 0.95rem;
+}
+
+.sidebar button {
+    padding: 0.5rem 0.8rem; /* Larger padding */
+    margin-left: 0.5rem;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.571rem; /* Converted from 8px */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem; /* Space between icon and text */
+    transition: background-color 0.2s;
+}
+.sidebar button:hover {
+    background-color: #0056b3;
+}
+
+.sidebar-dropdown {
+    background: #f8fafc;
+    padding: 0.5rem 0.5rem; /* Adjusted padding */
+    border-radius: 0.571rem; /* Converted from 8px */
+    box-shadow: inset 0 0.071rem 0.214rem rgba(0, 0, 0, 0.05); /* Converted from 1px 3px */
+    margin-top: 0.5rem;
+    border: 0.071rem solid #e2e8f0; /* Converted from 1px */
+}
+
+.sidebar-dropdown li {
+    margin: 0.3rem 0; /* Reduced margin */
+    padding: 0.4rem 0.8rem; /* Adjusted padding */
+    border-radius: 0.428rem; /* Converted from 6px */
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.sidebar-dropdown li:hover {
+    box-shadow: 0 0.071rem 0.357rem rgba(0,0,0,0.08); /* Converted from 1px 5px */
+    transform: none; /* No translateY on hover for dropdown items */
+}
+
+.sidebar-dropdown li.active-category { /* Active state for category list items */
+    font-weight: 700;
+    box-shadow: 0 0.071rem 0.357rem rgba(0,0,0,0.1); /* Converted from 1px 5px */
+    transform: translateY(-0.071rem); /* Converted from -1px */
+}
+
+.sidebar-dropdown .add-category-input-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    background-color: #edf2f7;
+    border-radius: 0.428rem;
+}
+.sidebar-dropdown .add-category-input-row input {
+    border: 0.071rem solid #cbd5e1;
+}
+
+.sidebar-add-task-btn {
+    width: 100%;
+    margin-top: 2rem;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    background-color: #28a745;
+    color: white;
+    border-radius: 0.714rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0.285rem 0.714rem rgba(40, 167, 69, 0.2);
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.sidebar-add-task-btn:hover {
+    background-color: #218838;
+    transform: translateY(-0.142rem);
+    box-shadow: 0 0.428rem 0.857rem rgba(40, 167, 69, 0.3);
+}
+.sidebar-add-task-btn svg {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+}
+
+
+/* Content Area - Base */
+.content-area {
+    flex: 1;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.todo-header {
+    margin-bottom: 1.5rem;
+}
+
+/* My Day specific styles */
+.myday-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+    background: linear-gradient(to right, #dbeafe, #e0f2fe);
+    transform: translateX(-100%);
+    animation: slideInFromLeft 0.5s ease-out forwards;
+}
+
+/* Animation for My Day page */
+@keyframes slideInFromLeft {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+.myday-header {
+    font-family: 'Crimson Text', serif;
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    color: #007bff;
+    animation: dropInLetter 0.05s ease-out forwards;
+    display: inline-block;
+}
+
+/* Keyframes for the letter-by-letter drop-in animation */
+@keyframes dropInLetter {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Existing .todo-header h1.animated-typing-text is now replaced/modified */
+.todo-header h1.zen-welcome-text {
+    font-family: 'Crimson Text', serif;
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    text-transform: capitalize;
+    color: #007bff;
+}
+
+
+.search-bar {
+    background: #585a52;
+    padding: 0.6rem;
+    border-radius: 0.714rem;
+    border: 0.071rem solid #ccc;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    gap: 0.5rem;
+    margin: 0 auto;
+    /* Search icon on the right */
+    flex-direction: row-reverse;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    flex-grow: 1;
+}
+
+.todo-welcome {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.welcome-box,
+.quote-box,
+.calendar-box,
+.summary-box,
+.todo-item {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.welcome-box:hover,
+.quote-box:hover,
+.calendar-box:hover,
+.summary-box:hover,
+.todo-item:hover {
+    transform: translateY(-0.357rem);
+    box-shadow: 0 0.571rem 1.142rem rgba(0, 0, 0, 0.1);
+}
+
+.welcome-box {
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8);
+    color: white;
+    padding: 1.5rem 2rem;
+    border-radius: 1.428rem;
+    flex: 1;
+    min-width: 17.857rem;
+}
+
+.quote-box {
+    background: linear-gradient(to right, #86efac, #4ade80);
+    color: #065f46;
+    padding: 1rem;
+    border-radius: 1.142rem;
+    flex: 1;
+    min-width: 17.857rem;
+    font-style: normal;
+    text-align: center;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quote-text-only {
+    display: inline-block;
+    animation: fadeQuoteText 10s linear infinite;
+    opacity: 1;
+    text-align: center;
+}
+
+@keyframes fadeQuoteText {
+    0% { opacity: 1; transform: translateY(0); }
+    45% { opacity: 1; transform: translateY(0); }
+    50% { opacity: 0; transform: translateY(-0.714rem); }
+    55% { opacity: 1; transform: translateY(0.714rem); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.calendar-box {
+    background: linear-gradient(to right, #c4b5fd, #a78bfa);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 1.428rem;
+    min-width: 18.571rem;
+}
+
+.date-strip {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.date-pill {
+    background: white;
+    color: #333;
+    padding: 0.5rem;
+    border-radius: 0.714rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.today-highlight {
+    background: #007bff;
+    color: white;
+}
+
+.todo-main-content {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.today-panel {
+    background: linear-gradient(135deg, #dd9fc3, #e974b1);
+    padding: 1rem;
+    border-radius: 0.857rem;
+    box-shadow: 0 0.285rem 0.714rem rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    width: 21rem;
+    max-width: 25rem;
+}
+
+.todo-section {
+    flex-grow: 1;
+    min-width: 28.571rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.today-boxes {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.summary-box {
+    flex: 1;
+    background: #f1f5f9;
+    padding: 0.8rem;
+    border-radius: 0.714rem;
+    text-align: center;
+    font-weight: 600;
+    color: #1e3a8a;
+}
+
+.circular-progress {
+    width: 7.142rem;
+    height: 7.142rem;
+    border-radius: 50%;
+    background: conic-gradient(#22c55e var(--progress, 0deg), #e5e7eb 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 0 auto;
+    transition: background 1s ease-in-out;
+}
+
+.gray-gradient-container {
+    background: linear-gradient(135deg, #e1f03c, #e3ee0e);
+    padding: 1.5rem;
+    border-radius: 1.071rem;
+    box-shadow: 0 0.285rem 1.071rem rgba(0, 0, 0, 0.1);
+}
+
+.todo-input-section {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.todo-input-section .create-task-input {
+    flex: 0.7;
+    padding: 0.8rem;
+    border: 0.071rem solid #ccc;
+    border-radius: 0.714rem;
+}
+
+.todo-input-section button {
+    padding: 0.8rem 1.2rem;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.714rem;
+    flex: 0.3;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.todo-input-section button:hover {
+    background-color: #0056b3;
+}
+
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.todo-item {
+    position: relative;
+    padding: 1rem;
+    border-radius: 0.857rem;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: fadeIn 0.4s ease-in;
+    flex-wrap: wrap;
+    background-color: #ffffff;
+    box-shadow: 0 0.142rem 0.285rem rgba(0, 0, 0, 0.05);
+    z-index: 1;
+}
+
+.todo-item.done {
+    background: #e2e8f0;
+}
+
+.todo-item.done .todo-text {
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.toggle-check-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.714rem;
+    height: 1.714rem;
+    border: 0.142rem solid #64748b;
+    border-radius: 0.428rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+    color: transparent;
+    font-size: 1.1rem;
+}
+
+.toggle-check-box svg {
+    transition: color 0.2s;
+}
+
+.todo-item.done .toggle-check-box {
+    background-color: #16a34a;
+    border-color: #16a34a;
+    color: white;
+}
+
+.toggle-check-box:hover {
+    background-color: #e0f2fe;
+}
+
+.todo-text {
+    flex: 1;
+    cursor: pointer;
+    min-width: 7.142rem;
+    margin-right: 1rem;
+    word-break: break-word;
+}
+
+/* Priority backgrounds - applying directly to todo-item */
+.todo-item.easy {
+    background: linear-gradient(to right, #bbf7d0, #86efac);
+    color: #15803d;
+}
+
+.todo-item.medium {
+    background: linear-gradient(to right, #fef08a, #facc15);
+    color: #92400e;
+}
+
+.todo-item.hard {
+    background: linear-gradient(to right, #fdba74, #fb923c);
+    color: #9a3412;
+}
+
+.todo-item.urgent {
+    background: linear-gradient(to right, #fca5a5, #ef4444);
+    color: #b91c1c;
+}
+
+.task-labels-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-right: 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    flex-wrap: wrap;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.task-label {
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.428rem;
+    background-color: #e0e7ff;
+    color: #4338ca;
+    white-space: nowrap;
+}
+
+.task-label.due-date-label {
+    background-color: #cfe2f3;
+    color: #0d6efd;
+    font-weight: 600;
+}
+
+.unassigned-marker {
+    background-color: #fed7aa !important;
+    color: #c2410c !important;
+    font-weight: bold;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.428rem;
+    margin-right: 1rem;
+}
+
+.task-options {
+    margin-left: auto;
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.task-options:hover {
+    background-color: #f1f5f9;
+}
+
+/* Overlay for the modal effect */
+.task-menu-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 10000;
+    padding-top: 5vh;
+    box-sizing: border-box;
+}
+
+.task-menu-popup {
+    background: white;
+    border-radius: 0.857rem;
+    box-shadow: 0 0.571rem 1.428rem rgba(0, 0, 0, 0.3);
+    padding: 1.5rem;
+    padding-bottom: 4rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    z-index: 10001;
+    transform: translateY(0);
+    animation: slideInFromTop 0.3s ease-out;
+    position: relative;
+    min-width: 42.857rem;
+    max-width: 95%;
+    justify-content: space-around;
+}
+
+@keyframes slideInFromTop {
+    from { transform: translateY(-0.071rem); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+
+.menu-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 12.857rem;
+}
+
+.menu-header {
+    font-weight: bold;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+    display: block;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.menu-item {
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 0.428rem;
+    transition: background-color 0.2s, color 0.2s;
+    text-align: center;
+}
+
+.menu-item:hover {
+    background-color: #e0f2fe;
+    color: #0369a1;
+}
+
+/* Priority item colors within the menu */
+.menu-item.easy { background: #dcfce7; color: #15803d; }
+.menu-item.medium { background: #fffbeb; color: #92400e; }
+.menu-item.hard { background: #ffe4e6; color: #9a3412; }
+.menu-item.urgent { background: #fee2e2; color: #b91c1c; }
+
+
+/* Custom Time Picker Styles */
+.time-picker-custom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    background-color: #f1f5f9;
+    border-radius: 0.571rem;
+    padding: 0.8rem;
+    box-shadow: inset 0 0.071rem 0.214rem rgba(0,0,0,0.1);
+}
+
+.time-select-group {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+    justify-content: center;
+}
+
+.time-picker-custom .time-select {
+    padding: 0.6rem 0.8rem;
+    border: 0.071rem solid #cbd5e1;
+    border-radius: 4.714rem;
+    font-size: 1rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13%205.7L146.2%20202.7%2018.8%2075.1a17.6%2017.6%200%200%200-25.3%2023.1l130.4%20130.1c6.6%206.6%2017.2%206.6%2023.7%200L287%2092.6c4.5-5.3%204.7-12.8.2-18.1z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 0.7em top 50%, 0 0;
+    background-size: 0.65em auto, 100%;
+    cursor: pointer;
+    background-color: white;
+    width: 5.714rem;
+    text-align: center;
+    flex-shrink: 0;
+    color: #333;
+}
+
+.time-picker-custom .time-select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.142rem rgba(0, 123, 255, 0.25);
+}
+
+.time-picker-custom .time-colon {
+    font-weight: bold;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.ampm-buttons-group {
+    display: flex;
+    gap: 0.8rem;
+    width: 100%;
+    justify-content: center;
+}
+
+.time-picker-custom .ampm-button {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    border: 0.071rem solid #cbd5e1;
+    border-radius: 4.714rem;
+    background-color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    color: #333;
+}
+
+.time-picker-custom .ampm-button.selected {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.time-picker-custom .ampm-button:not(.selected):hover {
+    background-color: #e0f2fe;
+}
+
+/* Date Input style */
+.date-input {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 0.071rem solid #cbd5e1;
+    border-radius: 0.571rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+.date-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.142rem rgba(0, 123, 255, 0.25);
+}
+
+/* Description Textarea Style */
+.description-textarea {
+    width: 100%;
+    min-height: 5.714rem;
+    padding: 0.8rem;
+    border: 0.071rem solid #cbd5e1;
+    border-radius: 0.571rem;
+    font-size: 0.95rem;
+    resize: vertical;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+.description-textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.142rem rgba(0, 123, 255, 0.25);
+}
+
+
+.todo-time-display {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-left: 1rem;
+    color: #334155;
+    white-space: nowrap;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #ef4444;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 1rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.delete-btn:hover {
+    background-color: #fee2e2;
+}
+
+.modal-done-btn {
+    position: absolute;
+    bottom: 1rem;
+    right: 1.5rem;
+    padding: 0.7rem 1.5rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.571rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+    z-index: 10002;
+}
+
+.modal-done-btn:hover {
+    background-color: #0056b3;
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(0.357rem); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Ensure z-index layering */
+.todo-section {
+    overflow: visible;
+}
+
+/* Subtasks display - adjusted spacing */
+.subtasks-list {
+    list-style: none;
+    padding-left: 3.5rem;
+    margin-top: -0.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.subtask-item {
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.4;
+}
+
+/* Style for displayed description below task item */
+.todo-description-display {
+    width: calc(100% - 3.5rem);
+    margin-left: 3.5rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    color: #6b7280;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+    background-color: #f8f9fa;
+    padding: 0.5rem 0.8rem;
+    border-radius: 0.571rem;
+    border-left: 0.214rem solid #cbd5e1;
+}
+
+.no-tasks-message {
+    text-align: center;
+    color: #6b7280;
+    font-style: italic;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 0.857rem;
+    margin-top: 1rem;
+}
+
+/* New My Day Layout Styles */
+.myday-content {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.myday-left-panel {
+    flex-grow: 1;
+    min-width: 25rem;
+}
+
+.myday-welcome-card {
+    background: linear-gradient(135deg, #a78bfa, #c4b5fd);
+    color: white;
+    padding: 1.5rem 2rem;
+    border-radius: 1.428rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 0.285rem 0.714rem rgba(0, 0, 0, 0.1);
+}
+
+.myday-welcome-card h2 {
+    font-family: 'Crimson Text', serif;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.myday-welcome-card p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+.myday-tasks-section {
+    flex-grow: 2;
+    min-width: 28.571rem;
+}
+
+.myday-task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* My Day specific date display on the right */
+.myday-date-panel {
+    width: 15rem;
+    flex-shrink: 0;
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 1.428rem;
+    box-shadow: 0 0.285rem 0.714rem rgba(0, 0, 0, 0.1);
+}
+
+.myday-date-panel h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.myday-date-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.myday-date-item {
+    background-color: #e0f2fe;
+    color: #007bff;
+    padding: 0.6rem 1rem;
+    border-radius: 0.714rem;
+    text-align: center;
+    font-weight: 600;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.myday-date-item.highlight-today {
+    background-color: #007bff;
+    color: white;
+    box-shadow: 0 0.142rem 0.571rem rgba(0, 123, 255, 0.2);
+}
+
+.myday-date-item:hover {
+    background-color: #cceeff;
+}
+
+/* No tasks message for My Day */
+.myday-no-tasks-message {
+    text-align: center;
+    color: #6b7280;
+    font-style: italic;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 0.857rem;
+    margin-top: 1rem;
+}
+/* For the date under My Day title */
+.my-day-date {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: -5px;
+    margin-bottom: 15px;
+    font-weight: normal;
+}
+.my-day-combined-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 25px;
+    background-color: #f0f4f8;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    flex-wrap: wrap;
+}
+/* My Day specific info panel */
+.my-day-info-panel {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    margin-bottom: 20px;
+    max-width: 800px;
+    width: 100%;
+
+}
+
+.my-day-greeting {
+    font-size: 1.8em;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.my-day-summary-boxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.my-day-summary-boxes .summary-box {
+    background-color: #f0f4f8;
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.my-day-summary-boxes .summary-box:nth-child(1) { background-color: #e0f2fe; }
+.my-day-summary-boxes .summary-box:nth-child(2) { background-color: #d1fae5; }
+.my-day-summary-boxes .summary-box:nth-child(3) { background-color: #ffe4e6; }
+
+
+.my-day-progress-quote {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+/* Specific styling for My Day progress bar */
+.circular-progress.my-day-progress {
+    width: 100px;
+    height: 100px;
+    font-size: 1.2em;
+    flex-shrink: 0;
+}
+
+/* Specific styling for My Day quote box */
+.quote-box.my-day-quote-box {
+    flex-grow: 1;
+    padding: 15px;
+    font-size: 1.1em;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Optional: My Day specific add task input section (if you uncomment it later) */
+/*
+.my-day-add-task-input-section {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.my-day-add-task-input-section input {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+.my-day-add-task-input-section button {
+    padding: 12px 25px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.my-day-add-task-input-section button:hover {
+    background-color: #45a049;
+}
+*/
+
+/* Adjust general todo-list margins if needed for the new panel */
+.todo-section {
+    margin-top: 20px;
+}
+/* Add this to your TodoApp.css */
+
+/* Container for greeting and image */
+.my-day-greeting-and-image {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.my-day-greeting-and-image .my-day-greeting {
+    margin: 0;
+}
+
+.my-day-weekday-image {
+    width: 260px;
+    height: 420px;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* You might want to adjust the .my-day-info-panel itself too */
+.my-day-info-panel {
+    padding: 25px;
+}
+
+/* --- Premium Elements Styling --- */
+
+/* Base for cards/panels */
+.premium-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 25px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.premium-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Background for sections containing task lists */
+.premium-section-bg {
+    background: linear-gradient(to bottom right, #f8fafc, #edf2f7);
+    border-radius: 12px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+}
+
+/* Section titles for filtered views */
+.section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #4a5568;
+    margin-bottom: 25px;
+    text-align: center;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, #6366f1, #a855f7);
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* Empty state styling for Trash/empty filtered lists */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+    text-align: center;
+    color: #6b7280;
+    font-family: 'Inter', sans-serif;
+    padding: 30px;
+}
+
+.empty-message {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    color: #cbd5e1;
+    margin-bottom: 20px;
+}
+
+/* Premium button style */
+.premium-button {
+    background: linear-gradient(to right, #6366f1, #a855f7);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    margin-top: 20px;
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.premium-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+    opacity: 0.95;
+}
+
+/* Settings and Feedback specific styles */
+.settings-panel, .feedback-panel {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #ffffff;
+}
+
+.settings-view .section-title, .feedback-view .section-title {
+    margin-bottom: 30px;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px dashed #e2e8f0;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.setting-item:last-child {
+    border-bottom: none;
+}
+
+.setting-item label {
+    font-weight: 500;
+    color: #4a5568;
+    flex-shrink: 0;
+    min-width: 120px;
+}
+
+.setting-input, .setting-select {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    min-width: 150px;
+}
+
+.setting-input:focus, .setting-select:focus, .feedback-textarea:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.setting-checkbox {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+.feedback-textarea {
+    width: 100%;
+    resize: vertical;
+    min-height: 120px;
+    margin-top: 15px;
+    box-sizing: border-box;
+}
+
+.feedback-intro, .feedback-note {
+    font-size: 0.95rem;
+    color: #6b7280;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.feedback-note {
+    margin-top: 20px;
+    font-style: italic;
+}
+
+/* Add any specific animations here */
+/* Example: Simple fade-in for content areas */
+.filtered-tasks-view, .trash-view, .settings-view, .feedback-view {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Sidebar item hover effect */
+.sidebar-menu li:hover {
+    background-color: rgba(99, 102, 241, 0.1);
+    color: #6366f1;
+    transform: translateX(5px);
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+}
+
+/* Ensure the todo-item also has a nice hover */
+.todo-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Styles for trashed items */
+.todo-item.trashed-item {
+    background-color: #ffe0e0;
+    color: #7d0a0a;
+    text-decoration: line-through;
+    opacity: 0.8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 0.857rem;
+}
+
+.trashed-item .todo-text {
+    flex-grow: 1;
+    cursor: default;
+    text-decoration: line-through;
+}
+
+.trash-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.restore-btn, .permanently-delete-btn {
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background-color 0.2s, color 0.2s;
+    border: none;
+}
+
+.restore-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.restore-btn:hover {
+    background-color: #45a049;
+}
+
+.permanently-delete-btn {
+    background-color: #dc2626;
+    color: white;
+}
+
+.permanently-delete-btn:hover {
+    background-color: #b91c1c;
+}
+
+/* Hide .section-title when inside specific view containers to avoid duplicate headings */
+/* This assumes a primary heading for the view already exists outside of .section-title */
+.trash-view .section-title,
+.filtered-tasks-view .section-title, /* Covers Completed, Upcoming, Important */
+.settings-view .section-title,
+.feedback-view .section-title {
+    display: none;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .todo-main {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 1rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        border-bottom: 1px solid #e0e7ff;
+    }
+
+    .sidebar h2.logo-animated {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .sidebar ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .sidebar li {
+        margin-bottom: 0.5rem;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.9rem;
+    }
+
+    .sidebar li svg {
+        margin-right: 0.5rem;
+        font-size: 1rem;
+    }
+
+    .sidebar .count {
+        padding: 0.1rem 0.4rem;
+        font-size: 0.7em;
+    }
+
+    .sidebar-add-task-btn {
+        margin-top: 1rem;
+        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .content-area {
+        padding: 1rem;
+    }
+
+    .todo-welcome {
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .welcome-box,
+    .quote-box,
+    .calendar-box,
+    .summary-box {
+        min-width: unset;
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .welcome-box h2, .myday-welcome-card h2 {
+        font-size: 1.5rem;
+    }
+    .myday-header {
+        font-size: 2.5rem;
+    }
+
+    .todo-main-content {
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .today-panel,
+    .todo-section {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .todo-input-section {
+        flex-direction: column;
+        gap: 0.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .todo-input-section .create-task-input,
+    .todo-input-section button {
+        width: 100%;
+        flex: unset;
+    }
+
+    .todo-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.8rem;
+    }
+
+    .toggle-check-box {
+        margin-bottom: 0.5rem;
+    }
+
+    .todo-text {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+        min-width: unset;
+        width: 100%;
+    }
+
+    .task-labels-group {
+        width: 100%;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .task-options {
+        margin-left: 0;
+        align-self: flex-end;
+    }
+
+    .todo-description-display {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .task-menu-popup {
+        min-width: unset;
+        width: 95%;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        padding-bottom: 3rem;
+    }
+
+    .menu-column {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .modal-done-btn {
+        bottom: 0.5rem;
+        right: 0.5rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .myday-content {
+        flex-direction: column;
+    }
+
+    .myday-left-panel, .myday-tasks-section, .myday-date-panel {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .my-day-combined-section {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .my-day-progress-quote {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .circular-progress.my-day-progress {
+        width: 80px;
+        height: 80px;
+        font-size: 1em;
+    }
+    .my-day-weekday-image {
+        width: 100%;
+        height: auto;
+        max-width: 200px;
+    }
+
+    .settings-panel, .feedback-panel {
+        padding: 15px;
+    }
+    .setting-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .setting-item label, .setting-input, .setting-select {
+        width: 100%;
+        min-width: unset;
+    }
+}

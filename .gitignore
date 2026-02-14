@@ -1,0 +1,24 @@
+# React
+/node_modules
+/build
+/.pnp
+.pnp.js
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Django
+venv/
+__pycache__/
+*.pyc
+db.sqlite3
+
+# OS
+.DS_Store

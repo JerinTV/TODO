@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Table with Rowspan and Colspan</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 50%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Table Example: Rowspan and Colspan</h2>
+
+<table>
+    <tr>
+        <th>Subject</th>
+        <th colspan="2">Marks</th> <!-- Colspan = 2 -->
+    </tr>
+    <tr>
+        <td rowspan="2">Math</td> <!-- Rowspan = 2 -->
+        <td>Midterm</td>
+        <td>90</td>
+    </tr>
+    <tr>
+        <td>Final</td>
+        <td>95</td>
+    </tr>
+    <tr>
+        <td>Science</td>
+        <td colspan="2">85</td> <!-- Colspan = 2 -->
+    </tr>
+</table>
+
+</body>
+</html>
