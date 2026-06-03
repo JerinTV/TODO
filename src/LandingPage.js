@@ -216,6 +216,18 @@ function LandingPage() {
         setPassword2('');
     };
 
+    const handleStartTodo = () => {
+        const accessToken = localStorage.getItem('accessToken');
+        const storedUsername = localStorage.getItem('loggedInUsername');
+
+        if (accessToken && storedUsername) {
+            navigate('/todo');
+            return;
+        }
+
+        handleModalToggle(true);
+    };
+
     return (
         <div className="landing-container" ref={landingContainerRef}>
             {/* Navbar (existing code) */}
@@ -317,7 +329,7 @@ function LandingPage() {
                 <img src="/todologo.jpg" alt="ZenTodo Logo" className="hero-image" onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/160x160/cccccc/000000?text=Logo"; }} />
                 <h1>Welcome to ZenTodo</h1>
                 <p>Organize your tasks effortlessly. Minimal, elegant, and powerful.</p>
-                <button onClick={() => navigate('/todo')} className="start-btn">
+                <button onClick={handleStartTodo} className="start-btn">
                     Go to Todo App →
                 </button>
             </div>
