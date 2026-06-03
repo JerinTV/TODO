@@ -7,6 +7,22 @@ import { FaCheckCircle, FaRocket, FaShieldAlt, FaLightbulb, FaEnvelope, FaInfoCi
 import './LandingPage.css';
 import API_BASE_URL from './apiConfig';
 
+const formatApiError = (data, fallback) => {
+    if (!data) return fallback;
+    if (typeof data === 'string') return data;
+    if (data.detail) return data.detail;
+    if (data.non_field_errors) return data.non_field_errors.join(' ');
+
+    const messages = Object.entries(data)
+        .flatMap(([field, value]) => {
+            const fieldMessages = Array.isArray(value) ? value : [value];
+            return fieldMessages.map((message) => `${field}: ${message}`);
+        })
+        .join(' ');
+
+    return messages || fallback;
+};
+
 function LandingPage() {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
@@ -137,7 +153,7 @@ function LandingPage() {
                 console.error('Error during login:', error);
                 if (error.response) {
                     // Server responded with an error (e.g., 401, 400)
-                    setErrorMessage(error.response.data.detail || 'Login failed. Please check your credentials.');
+                    setErrorMessage(formatApiError(error.response.data, 'Login failed. Please check your credentials.'));
                 } else if (error.request) {
                     // Request was made but no response received
                     setErrorMessage('No response from server. Please check your network connection.');
@@ -177,14 +193,7 @@ function LandingPage() {
                 console.error('Error during signup:', error);
                 if (error.response) {
                     // Server responded with an error (e.g., 400 Bad Request)
-                    const data = error.response.data;
-                    let errorMsg = 'Signup failed: ';
-                    if (data.username) errorMsg += `Username: ${data.username[0]} `;
-                    if (data.email) errorMsg += `Email: ${data.email[0]} `;
-                    if (data.password) errorMsg += `Password: ${data.password[0]} `;
-                    if (data.password2) errorMsg += `Password confirmation: ${data.password2[0]} `;
-                    if (data.detail) errorMsg = data.detail; // General error
-                    setErrorMessage(errorMsg || 'Signup failed. Please try again.');
+                    setErrorMessage(formatApiError(error.response.data, 'Signup failed. Please try again.'));
                 } else if (error.request) {
                     setErrorMessage('No response from server. Please check your network connection.');
                 } else {
