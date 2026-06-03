@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Import axios for API calls
 import './TodoApp.css'; // Your original CSS styles are loaded here
+import API_BASE_URL from './apiConfig';
 import {
     FaTasks, FaCalendarAlt, FaCog, FaTachometerAlt, FaTrashAlt,
     FaEllipsisV, FaPlus, FaCheck, FaRegSquare, FaSun, FaClipboardList,
@@ -56,8 +57,6 @@ function TodoApp() {
 
     // State for the search query
     const [searchQuery, setSearchQuery] = useState('');
-
-    const API_BASE_URL = 'http://127.0.0.1:8000/api/'; // Your Django API base URL
 
     // --- Effect to load tasks when the component mounts (on login) ---
     useEffect(() => {

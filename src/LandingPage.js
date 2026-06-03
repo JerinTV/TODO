@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaCheckCircle, FaRocket, FaShieldAlt, FaLightbulb, FaEnvelope, FaInfoCircle, FaUsers, FaCloudUploadAlt, FaSyncAlt } from 'react-icons/fa';
 import './LandingPage.css';
+import API_BASE_URL from './apiConfig';
 
 function LandingPage() {
     const navigate = useNavigate();
@@ -113,13 +114,11 @@ function LandingPage() {
         setErrorMessage(''); // Clear previous errors
         setSuccessMessage(''); // Clear previous success messages
 
-        const BASE_URL = 'http://127.0.0.1:8000/api/'; // Your Django API base URL
-
         if (isLogin) {
             // --- LOGIN LOGIC ---
             try {
                 // For login, typically username (or email if configured) and password
-                const response = await axios.post(`${BASE_URL}token/`, {
+                const response = await axios.post(`${API_BASE_URL}token/`, {
                     username: username, // Use the username state for login username
                     password: password,
                 });
@@ -155,7 +154,7 @@ function LandingPage() {
             }
 
             try {
-                const response = await axios.post(`${BASE_URL}register/`, {
+                const response = await axios.post(`${API_BASE_URL}register/`, {
                     username: username,
                     email: email,
                     password: password,
